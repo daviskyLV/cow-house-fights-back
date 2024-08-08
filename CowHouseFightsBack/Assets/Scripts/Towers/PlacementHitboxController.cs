@@ -10,6 +10,8 @@ public class PlacementHitboxController : MonoBehaviour
     [SerializeField] private Material collisionColor;
 
     private List<Transform> hitboxes;
+    [SerializeField]
+    private bool placedDown = false;
     /// <summary>
     /// Whenever a tower's placement availability changes. Boolean for can/can't be placed
     /// </summary>
@@ -22,6 +24,7 @@ public class PlacementHitboxController : MonoBehaviour
         {
             hitboxes.Add(transform.GetChild(i));
         }
+        ShowHitbox(false);
     }
 
     private void ChangeColliderMaterial(Material mat)
@@ -32,16 +35,31 @@ public class PlacementHitboxController : MonoBehaviour
             mr.material = mat;
         }
     }
+    
+    /// <summary>
+    /// Enable or disable hitboxes
+    /// </summary>
+    /// <param name="visible">True if visible</param>
+    public void ShowHitbox(bool visible = true)
+    {
+        foreach (var t in hitboxes)
+        {
+            t.GetComponent<MeshRenderer>().enabled = visible;
+        }
+    }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         OnPlacementAvailable?.Invoke(false);
         ChangeColliderMaterial(collisionColor);
+        ShowHitbox();
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         OnPlacementAvailable?.Invoke(true);
         ChangeColliderMaterial(noCollisionColor);
+        if (placedDown)
+            ShowHitbox(false);
     }
 }
