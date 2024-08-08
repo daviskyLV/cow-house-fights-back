@@ -3,15 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tower
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ignored
   - Water
   - UI
-  - 
+  - Placement
   - 
   - 
   - 
