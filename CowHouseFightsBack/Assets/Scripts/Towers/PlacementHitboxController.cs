@@ -24,23 +24,24 @@ public class PlacementHitboxController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void ChangeColliderMaterial(Material mat)
     {
-        OnPlacementAvailable?.Invoke(false);
         foreach (var t in hitboxes)
         {
             var mr = t.GetComponent<MeshRenderer>();
-            mr.material = collisionColor;
+            mr.material = mat;
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        OnPlacementAvailable?.Invoke(false);
+        ChangeColliderMaterial(collisionColor);
     }
 
     private void OnCollisionExit(Collision other)
     {
         OnPlacementAvailable?.Invoke(true);
-        foreach (var t in hitboxes)
-        {
-            var mr = t.GetComponent<MeshRenderer>();
-            mr.material = noCollisionColor;
-        }
+        ChangeColliderMaterial(noCollisionColor);
     }
 }

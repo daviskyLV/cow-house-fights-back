@@ -26,11 +26,6 @@ public class DaylightBarController : MonoBehaviour
     private int hrs12 = 60 * 12;
     private int hrs24 = 60 * 24;
 
-    private void Start()
-    {
-        SetTime(1234, 22);
-    }
-
     /// <summary>
     /// Set the current time and day. Automatically triggers left/right icon animations on day/night change.
     /// </summary>
