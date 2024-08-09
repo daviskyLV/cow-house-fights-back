@@ -1,0 +1,2 @@
+MoonIconOutlined.png: https://www.flaticon.com/free-icon/crescent_1779841?related_id=1779779
+SunIconOutlined.png: https://www.flaticon.com/free-icon/sun_2917249?related_id=2917242
