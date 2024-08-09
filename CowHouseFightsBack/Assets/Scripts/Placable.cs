@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Placable : MonoBehaviour
 {
-    [SerializeField] private GameObject placementHB;
+    [SerializeField] private PlacementHitboxController placementHB;
     
     /// <summary>
     /// Whenever a tower's placement availability changes. Boolean for can/can't be placed
@@ -18,8 +18,7 @@ public class Placable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        placementHB.GetComponent<PlacementHitboxController>()
-            .OnPlacementAvailable += NotifyPlacementAvailability;
+        placementHB.OnPlacementAvailable += NotifyPlacementAvailability;
     }
 
     private void NotifyPlacementAvailability(bool available)
@@ -33,6 +32,6 @@ public class Placable : MonoBehaviour
     /// <param name="visible">True if it should be visible</param>
     public void ShowPlacementHitbox(bool visible = true)
     {
-        placementHB.SetActive(visible);
+        placementHB.ShowHitbox(visible);
     }
 }

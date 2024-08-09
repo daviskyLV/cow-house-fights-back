@@ -17,12 +17,14 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Enable();
+        var move = controls.Playfield.Movement;
+        move.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        var move = controls.Playfield.Movement;
+        move.Disable();
     }
     
     public void LateUpdate()

@@ -9,7 +9,7 @@ public class PlacementHitboxController : MonoBehaviour
 
     [SerializeField] private Material collisionColor;
 
-    private List<Transform> hitboxes;
+    private List<Transform> hitboxes = new();
     [SerializeField]
     private bool placedDown = false;
     /// <summary>
@@ -19,12 +19,10 @@ public class PlacementHitboxController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hitboxes = new List<Transform>();
         for (int i = 0; i < transform.childCount; i++)
         {
             hitboxes.Add(transform.GetChild(i));
         }
-        ShowHitbox(false);
     }
 
     private void ChangeColliderMaterial(Material mat)

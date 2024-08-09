@@ -11,6 +11,8 @@ public class ShopController : MonoBehaviour
     
     private PlayerControls controls;
     private Placable currentPlacement;
+    private bool placementOffField = true;
+    private bool canBePlaced = false;
 
     private void Awake()
     {
@@ -19,12 +21,15 @@ public class ShopController : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Enable();
+        var select = controls.Playfield.Movement;
+        select.Enable();
+        select.performed += PlaceTower;
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        var select = controls.Playfield.Movement;
+        select.Disable();
     }
     
     // Start is called before the first frame update
@@ -43,7 +48,26 @@ public class ShopController : MonoBehaviour
     {
         var tower = Instantiate(chickenTowerPrefab);
         currentPlacement = tower.GetComponent<TowerController>();
+        canBePlaced = true;
+        currentPlacement.OnPlacementAvailable += PlacementAvailabilityChanged;
         currentPlacement.ShowPlacementHitbox(true);
+    }
+
+    private void PlaceTower(InputAction.CallbackContext context)
+    {
+        // doesnt work
+        if (canBePlaced && !placementOffField)
+        {
+            currentPlacement.transform.parent = towersGO.transform;
+            currentPlacement.ShowPlacementHitbox(false);
+            currentPlacement = null;
+            CreateNewTower();
+        }
+    }
+
+    private void PlacementAvailabilityChanged(bool available)
+    {
+        canBePlaced = available;
     }
 
     private void PositionPlacement()
@@ -58,7 +82,10 @@ public class ShopController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 1000, layerMask))
         {
             currentPlacement.transform.position = hit.point;
+            placementOffField = false;
             return;
         }
+
+        placementOffField = true;
     }
 }
