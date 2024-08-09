@@ -969,9 +969,9 @@ MonoBehaviour:
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 12722
-    ctime2: 24287
-    ctime3: 49344
-    ctime4: 61487
+    ctime2: 21823
+    ctime3: 50790
+    ctime4: 57343
     ctime5: 65535
     ctime6: 0
     ctime7: 0
@@ -990,19 +990,19 @@ MonoBehaviour:
   outlineGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0.23529412, b: 0.35686275, a: 1}
-    key1: {r: 0, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 0.23529412, b: 0.35686275, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0.23529412, b: 0.35686275, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0.23529412, b: 0.35686275, a: 0}
+    key5: {r: 0, g: 0.23529412, b: 0.35686275, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 19136
-    ctime2: 57343
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
+    ctime1: 12714
+    ctime2: 21823
+    ctime3: 50790
+    ctime4: 57343
+    ctime5: 65535
     ctime6: 0
     ctime7: 0
     atime0: 0
@@ -1015,8 +1015,10 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 4
+    m_NumColorKeys: 6
     m_NumAlphaKeys: 2
+  dayStartMinute: 480
+  dayEndMinute: 1260
 --- !u!1 &497692148
 GameObject:
   m_ObjectHideFlags: 0
