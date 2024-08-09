@@ -23,30 +23,30 @@ public class DaylightBarController : MonoBehaviour
     [SerializeField] private Gradient fillGradient;
     [SerializeField] private Gradient outlineGradient;
 
-    private int hrs12 = 60 * 12;
-    private int hrs24 = 60 * 24;
+    private const int Hrs12 = 60 * 12;
+    private const int Hrs24 = 60 * 24;
+
+    private void Start()
+    {
+        GameController.OnTimeChanged += SetTime;
+    }
 
     /// <summary>
     /// Set the current time and day. Automatically triggers left/right icon animations on day/night change.
     /// </summary>
     /// <param name="minutes">Clock time in minutes since midnight, eg. 125 = 02:05</param>
     /// <param name="day">Current day</param>
-    public void SetTime(int minutes, int day)
+    private void SetTime(int minutes, int day)
     {
-        var normalMins = minutes % hrs24;
+        var normalMins = minutes % Hrs24;
         timeText.text = $"Day {day}, {normalMins/60%24:00}:{normalMins%60:00}";
-        slider.value = normalMins % hrs12 / (float)hrs12;
+        slider.value = normalMins % Hrs12 / (float)Hrs12;
         
         // Set fill/text colors
-        var dayProgress = normalMins / (float)hrs24;
+        var dayProgress = normalMins / (float)Hrs24;
         fill.color = fillGradient.Evaluate(dayProgress);
         border.color = outlineGradient.Evaluate(dayProgress);
         timeText.color = fillGradient.Evaluate(dayProgress);
         timeText.outlineColor = outlineGradient.Evaluate(dayProgress);
-    }
-
-    private void Update()
-    {
-        SetTime((int)(Time.time*100), 1);
     }
 }

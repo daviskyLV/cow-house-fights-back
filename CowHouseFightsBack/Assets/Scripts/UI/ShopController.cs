@@ -21,14 +21,14 @@ public class ShopController : MonoBehaviour
 
     private void OnEnable()
     {
-        var select = controls.Playfield.Movement;
+        var select = controls.UI.Select;
         select.Enable();
         select.performed += PlaceTower;
     }
 
     private void OnDisable()
     {
-        var select = controls.Playfield.Movement;
+        var select = controls.UI.Select;
         select.Disable();
     }
     
@@ -59,6 +59,7 @@ public class ShopController : MonoBehaviour
         if (canBePlaced && !placementOffField)
         {
             currentPlacement.transform.parent = towersGO.transform;
+            currentPlacement.PlaceDown();
             currentPlacement.ShowPlacementHitbox(false);
             currentPlacement = null;
             CreateNewTower();

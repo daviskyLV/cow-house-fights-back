@@ -46,6 +46,15 @@ public class PlacementHitboxController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes whether hitbox is placed down or not
+    /// </summary>
+    /// <param name="placedDown">True for yes</param>
+    public void ChangePlacementStatus(bool placedDown)
+    {
+        this.placedDown = placedDown;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         OnPlacementAvailable?.Invoke(false);
