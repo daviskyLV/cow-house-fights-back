@@ -9,6 +9,10 @@ public class DayCycleFX : MonoBehaviour
     [SerializeField]
     [Tooltip("Intensity gradient based on alpha value")]
     private Gradient intensityGradient;
+
+    [SerializeField]
+    [Tooltip("Sun Angle gradient based on alpha value (alpha*360)")]
+    private Gradient sunAngleGradient;
     
     private const int Hrs12 = 60 * 12;
     private const int Hrs24 = 60 * 24;
@@ -27,9 +31,10 @@ public class DayCycleFX : MonoBehaviour
         
         // Rotating twice cuz couldnt figure out quaternions
         // First turning it into midnight rotation
+        var angle = sunAngleGradient.Evaluate(curMinNorm).a;
         transform.rotation = Quaternion.Euler(
             new Vector3(-1*middayRotation.x,middayRotation.y,middayRotation.z)
             );
-        transform.Rotate(Vector3.right * (360 * curMinNorm), Space.World);
+        transform.Rotate(Vector3.right * (360 * angle), Space.World);
     }
 }
