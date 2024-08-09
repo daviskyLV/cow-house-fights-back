@@ -21,6 +21,10 @@ public class GameController : MonoBehaviour
     /// </summary>
     public static event Action OnGameStarted;
     /// <summary>
+    /// Fired whenever the player loses the game
+    /// </summary>
+    public static event Action OnGameLost;
+    /// <summary>
     /// Fired whenever game's time changes. [currentMinute, currentDay]
     /// </summary>
     public static event Action<int, int> OnTimeChanged;
