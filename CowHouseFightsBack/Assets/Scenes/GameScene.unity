@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMinute: 480
-  minutesPerSecond: 25
+  minutesPerSecond: 10
 --- !u!4 &497692150
 Transform:
   m_ObjectHideFlags: 0

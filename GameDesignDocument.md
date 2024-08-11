@@ -40,7 +40,7 @@ The player can move the camera left & right with arrow keys/A&D/Joystick. When o
 - Spawn enemies based on current day/night
 - Implement ability to place chickens on the field (only for PC)
 - Implement basic game UI
-### 2. Breeding, farming, animations
+### 2. AI, Breeding, farming, animations
 - Implement ability to breed animals behind the barn
 - Implement food farming behind the barn
 - Implement animal animations
