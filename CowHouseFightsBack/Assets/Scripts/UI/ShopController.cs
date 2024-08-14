@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class ShopController : MonoBehaviour
     private bool placementOffField = true;
     private bool canBePlaced = false;
 
+    public static event Action<GameObject> OnTowerPlaced;
+    
     private void Awake()
     {
         controls = new PlayerControls();
@@ -47,7 +50,7 @@ public class ShopController : MonoBehaviour
     private void CreateNewTower()
     {
         var tower = Instantiate(chickenTowerPrefab);
-        currentPlacement = tower.GetComponent<TowerController>();
+        currentPlacement = tower.GetComponent<Placable>();
         canBePlaced = true;
         currentPlacement.OnPlacementAvailable += PlacementAvailabilityChanged;
         currentPlacement.ShowPlacementHitbox(true);
@@ -56,14 +59,15 @@ public class ShopController : MonoBehaviour
     private void PlaceTower(InputAction.CallbackContext context)
     {
         // doesnt work
-        if (canBePlaced && !placementOffField)
-        {
-            currentPlacement.transform.parent = towersGO.transform;
-            currentPlacement.PlaceDown();
-            currentPlacement.ShowPlacementHitbox(false);
-            currentPlacement = null;
-            CreateNewTower();
-        }
+        if (!canBePlaced || placementOffField)
+            return;
+        
+        currentPlacement.transform.parent = towersGO.transform;
+        currentPlacement.PlaceDown();
+        currentPlacement.ShowPlacementHitbox(false);
+        OnTowerPlaced?.Invoke(currentPlacement.gameObject);
+        currentPlacement = null;
+        CreateNewTower();
     }
 
     private void PlacementAvailabilityChanged(bool available)

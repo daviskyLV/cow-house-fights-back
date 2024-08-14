@@ -6,6 +6,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject testEnemy;
     [SerializeField] private int spawnMinuteInterval;
     [SerializeField] private Transform enemiesGO;
+    [SerializeField] private Transform towersGO;
+    [SerializeField] private PlayfieldController playfieldController;
+    [SerializeField] private Transform endGoal;
     
     // Last minute that an enemy had been spawned
     private int lastMinuteSpawned = 0;
@@ -50,6 +53,9 @@ public class EnemySpawner : MonoBehaviour
         var enemy = Instantiate(testEnemy, enemiesGO);
         var randOffset = new Vector3(transform.lossyScale.x * Random.Range(-.5f, .5f), 0, transform.lossyScale.y * Random.Range(-.5f, .5f));
         enemy.transform.position = transform.position + randOffset;
+        var enemyController = enemy.GetComponent<EnemyController>();
+        enemyController.Setup(towersGO, playfieldController, endGoal);
+        
         lastMinuteSpawned = currentMinute;
         lastDaySpawned = currentDay;
     }

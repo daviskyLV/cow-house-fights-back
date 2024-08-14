@@ -14,6 +14,7 @@ public class Placable : MonoBehaviour
     /// Whenever a tower's placement availability changes. Boolean for can/can't be placed
     /// </summary>
     public event Action<bool> OnPlacementAvailable;
+    public event Action OnPlacedDown;
     private bool placedDown = false;
     
     // Start is called before the first frame update
@@ -22,7 +23,7 @@ public class Placable : MonoBehaviour
         placementHB.OnPlacementAvailable += NotifyPlacementAvailability;
     }
 
-    private void NotifyPlacementAvailability(bool available)
+    protected void NotifyPlacementAvailability(bool available)
     {
         OnPlacementAvailable?.Invoke(available);
     }
@@ -46,5 +47,6 @@ public class Placable : MonoBehaviour
 
         placedDown = true;
         placementHB.ChangePlacementStatus(true);
+        OnPlacedDown?.Invoke();
     }
 }

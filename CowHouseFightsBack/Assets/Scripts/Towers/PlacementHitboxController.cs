@@ -8,7 +8,8 @@ public class PlacementHitboxController : MonoBehaviour
     [SerializeField] private Material noCollisionColor;
 
     [SerializeField] private Material collisionColor;
-
+    [SerializeField] private Rigidbody rb;
+    
     private List<Transform> hitboxes = new();
     [SerializeField]
     private bool placedDown = false;
