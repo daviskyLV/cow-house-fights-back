@@ -9,7 +9,8 @@ While the main direction of game's artstyle was set in GDD, finding the exact as
 I also used [itch.io](https://itch.io/game-assets) to get the barn, the chicken house and other wildlife animals.
 * [Farm buildings](https://quaternius.itch.io/lowpoly-farm-buildings) by quaternius
 * Free [wildlife animals](https://free-game-assets.itch.io/free-wild-animal-3d-low-poly-models)
-<br/><img src="https://assetstorev1-prd-cdn.unity3d.com/key-image/b4f2fac6-842d-48b5-9ff4-a1266cdcbabd.webp" alt="low-poly animals" height="100"/>
+
+<img src="https://assetstorev1-prd-cdn.unity3d.com/key-image/b4f2fac6-842d-48b5-9ff4-a1266cdcbabd.webp" alt="low-poly animals" height="100"/>
 <img src="https://assetstorev1-prd-cdn.unity3d.com/key-image/714597e3-5dde-4419-810d-545ef1bae449.webp" alt="vegetation" height="100"/>
 <img src="https://img.itch.zone/aW1hZ2UvMzI3NTkzLzE2MjEwNDkucG5n/347x500/ZwTR2G.png" alt="vegetation" height="100"/>
 
@@ -31,7 +32,7 @@ Implementing camera movement was quite simple - I followed a [tutorial](https://
 <img src="docs/input2.png" alt="UI input" height="200"/>
 
 ## Day/Night cycle
-Getting the cycle to feel right was quite difficult, but I used <i>AnimationCurve</i> to create a gradient for the light <b>intensity</b> and rotation of the sun for shadows. At first I used regular <i>Gradient</i> using the <b>Alpha channel</b> and blending to create the smooth animation, but after seeing a [video](https://www.youtube.com/watch?v=Nc9x0LfvJhI&t=394s) about animation curves, they were just what I needed.
+Getting the cycle to feel right was quite difficult, but I used <i>AnimationCurve</i> to create a gradient for the light <b>intensity</b> and rotation of the sun for shadows. At first I used regular <i>Gradient</i> using the <b>Alpha channel</b> and blending to create the smooth animation, but after seeing a [video](https://www.youtube.com/watch?v=Nc9x0LfvJhI&t=394s) about animation curves, they were just what I needed.<br/>
 <img src="docs/daynight-cycle.png" alt="day/night cycle script" height="120"/>
 
 ## Spawning enemies
