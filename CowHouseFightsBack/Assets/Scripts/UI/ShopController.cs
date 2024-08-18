@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class ShopController : MonoBehaviour
 {
     [SerializeField] private GameObject towersGO;
+    [SerializeField] private GameObject enemiesGO;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject chickenTowerPrefab;
     
@@ -26,7 +27,7 @@ public class ShopController : MonoBehaviour
     {
         var select = controls.UI.Select;
         select.Enable();
-        select.performed += PlaceTower;
+        select.performed += PlaceDownPlacement;
     }
 
     private void OnDisable()
@@ -56,7 +57,7 @@ public class ShopController : MonoBehaviour
         currentPlacement.ShowPlacementHitbox(true);
     }
 
-    private void PlaceTower(InputAction.CallbackContext context)
+    private void PlaceDownPlacement(InputAction.CallbackContext context)
     {
         // doesnt work
         if (!canBePlaced || placementOffField)
@@ -65,7 +66,12 @@ public class ShopController : MonoBehaviour
         currentPlacement.transform.parent = towersGO.transform;
         currentPlacement.PlaceDown();
         currentPlacement.ShowPlacementHitbox(false);
+        
+        // Since its a tower
+        var towerController = currentPlacement.gameObject.GetComponent<TowerController>();
+        towerController.Setup(enemiesGO);
         OnTowerPlaced?.Invoke(currentPlacement.gameObject);
+        
         currentPlacement = null;
         CreateNewTower();
     }

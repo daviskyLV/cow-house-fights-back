@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject healthbarGO;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private EnemyAnimation enemyAnimation;
     
     private float health;
     
@@ -43,6 +44,19 @@ public class EnemyController : MonoBehaviour
         MoveEnemy();
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        healthbarGO.GetComponent<Healthbar>().UpdateHealthValue(health/maxHealth);
+        if (!(health < 0))
+            return;
+        
+        // dead
+        TowerController.OnTowerPlaced -= RecheckPath;
+        TowerController.OnTowerDestroyed -= RecheckPath;
+        Destroy(this.gameObject);
+    }
+
     private void MoveEnemy()
     {
         // Checking alternative target scenarios
@@ -52,14 +66,17 @@ public class EnemyController : MonoBehaviour
             var distToTarget = Vector3.Distance(rb.position, targetSameY);
             
             if (distToTarget < agent.radius)
-            {
-                Debug.Log($"Alternative target {alternativeTarget.name} at {alternativeTarget.position} reached!");
                 return;
-            }
             
             // Moving towards alternative target
             var timeRequired = distToTarget / speed;
-            rb.MovePosition(Vector3.Lerp(rb.position, targetSameY, Time.fixedDeltaTime / timeRequired));
+            var direction = targetSameY - rb.position;
+            var targetRot = Quaternion.LookRotation(direction, Vector3.up);
+            
+            var lerpedPos = Vector3.Lerp(rb.position, targetSameY, Time.fixedDeltaTime / timeRequired);
+            var lerpedRot = Quaternion.RotateTowards(rb.rotation, targetRot, angularSpeed * Time.fixedDeltaTime);
+            rb.Move(lerpedPos, lerpedRot);
+            
             return;
         }
         
@@ -78,12 +95,20 @@ public class EnemyController : MonoBehaviour
             }
 
             targetPathpoint++;
+            enemyAnimation.SetTarget(navPath.corners[targetPathpoint]);
+            Debug.Log($"Next pathpoint position: {navPath.corners[targetPathpoint]}");
             return;
         }
         
         // Moving towards next point
         var nextPointTime = distToCurPoint / speed;
-        rb.MovePosition(Vector3.Lerp(rb.position, curPointSameY, Time.fixedDeltaTime / nextPointTime));
+        var nextDirection = curPointSameY - rb.position;
+        var nextRot = Quaternion.LookRotation(nextDirection, Vector3.up);
+        
+        var nextPosLerped = Vector3.Lerp(rb.position, curPointSameY, Time.fixedDeltaTime / nextPointTime);
+        var nextRotLerped = Quaternion.RotateTowards(rb.rotation, nextRot, angularSpeed * Time.fixedDeltaTime);
+        
+        rb.Move(nextPosLerped, nextRotLerped);
     }
 
     private void RecheckPath()
@@ -102,6 +127,8 @@ public class EnemyController : MonoBehaviour
             // Can get to barn, ignore towers and follow the path
             alternativeTarget = null;
             targetPathpoint = 0;
+            enemyAnimation.SetTarget(navPath.corners[targetPathpoint]);
+            Debug.Log($"Next pathpoint position: {navPath.corners[targetPathpoint]}");
         }
     }
 
@@ -114,6 +141,8 @@ public class EnemyController : MonoBehaviour
         {
             // No towers? Try to brute force the way to barn
             alternativeTarget = barn;
+            enemyAnimation.SetTarget(barn);
+            Debug.Log($"Barn position: {barn.transform.position}");
             return;
         }
         
@@ -129,6 +158,8 @@ public class EnemyController : MonoBehaviour
             alternativeTarget = alt;
             closestDist = dist;
         }
+        enemyAnimation.SetTarget(alternativeTarget);
+        Debug.Log($"Closest tower position: {alternativeTarget.transform.position}");
     }
 
     /// <summary>

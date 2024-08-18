@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform towersGO;
     [SerializeField] private PlayfieldController playfieldController;
     [SerializeField] private Transform endGoal;
+    [SerializeField] private int maxEnemies = 5;
     
     // Last minute that an enemy had been spawned
     private int lastMinuteSpawned = 0;
@@ -39,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
         if (!gameInProgress)
             return;
         
-        if (enemiesGO.childCount > 5)
+        if (enemiesGO.childCount >= maxEnemies)
             return;
 
         if (

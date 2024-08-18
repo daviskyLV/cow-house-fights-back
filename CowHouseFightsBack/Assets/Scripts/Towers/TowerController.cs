@@ -8,11 +8,9 @@ public class TowerController : MonoBehaviour
     
     [SerializeField] private Tower towerScript;
     [SerializeField] private Collider towerCollider;
-    [SerializeField] private Placable placable;
 
     private void Start()
     {
-        placable.OnPlacedDown += AwakenTower;
         towerScript.OnTowerDestroyed += TowerDestroyed;
     }
 
@@ -20,10 +18,11 @@ public class TowerController : MonoBehaviour
     {
         OnTowerDestroyed?.Invoke();
     }
-    
-    private void AwakenTower()
+
+    public void Setup(GameObject enemyFolder)
     {
         towerCollider.enabled = true;
+        towerScript.Setup(enemyFolder);
         OnTowerPlaced?.Invoke();
     }
 }

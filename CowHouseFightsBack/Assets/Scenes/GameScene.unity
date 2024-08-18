@@ -586,6 +586,7 @@ MonoBehaviour:
   towersGO: {fileID: 638260550}
   playfieldController: {fileID: 1632015270}
   endGoal: {fileID: 446870230}
+  maxEnemies: 1
 --- !u!4 &114724848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 612812996124309258, guid: f2727472b344747408ea8dfb42ce1873, type: 3}
@@ -4983,6 +4984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towersGO: {fileID: 638260549}
+  enemiesGO: {fileID: 929827402}
   mainCamera: {fileID: 519420031}
   chickenTowerPrefab: {fileID: 4013103919319056357, guid: d73e4c27d31f71498af2cca3ca070e03, type: 3}
 --- !u!1001 &1748299294

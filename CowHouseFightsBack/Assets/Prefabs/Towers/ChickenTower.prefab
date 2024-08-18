@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 770602448178637298}
+  shootingInterval: 2
+  projectilePrefab: {fileID: 4141160745846993865, guid: 93206c174d6a79c10813e309ae735e74, type: 3}
+  projectileOffset: {x: 0, y: 0.25, z: 0}
 --- !u!1 &1076314174748881097
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerScript: {fileID: 2612163416904982576}
   towerCollider: {fileID: 7795738399346711364}
-  placable: {fileID: 7025073535797870252}
 --- !u!114 &7025073535797870252
 MonoBehaviour:
   m_ObjectHideFlags: 0

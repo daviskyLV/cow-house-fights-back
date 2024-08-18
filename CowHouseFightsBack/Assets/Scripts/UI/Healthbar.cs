@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class Healthbar : MonoBehaviour
     /// <param name="health">Health amount between 0 and 1</param>
     public void UpdateHealthValue(float health)
     {
+        health = Math.Clamp(health, 0.0f, 1.0f);
         hpSlider.value = health;
         hpFill.color = fillHpColor.Evaluate(health);
     }

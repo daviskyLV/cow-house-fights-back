@@ -1,2 +1,4 @@
 MoonIconOutlined.png: https://www.flaticon.com/free-icon/crescent_1779841?related_id=1779779
 SunIconOutlined.png: https://www.flaticon.com/free-icon/sun_2917249?related_id=2917242
+AngryEgg.png made out of: https://www.vecteezy.com/png/10794334-one-white-egg-png-file and https://www.istockphoto.com/vector/angry-cartoon-face-aggressive-emotion-gm971997898-264660575
+EggSplatter.png: https://www.istockphoto.com/vector/fried-egg-blot-shape-in-vector-gm164401392-14469104
